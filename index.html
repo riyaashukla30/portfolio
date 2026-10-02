@@ -97,16 +97,66 @@ footer{text-align:center;color:var(--soft);font-size:.85rem;padding:10px 0 34px}
 @keyframes dr{to{stroke-dashoffset:0}}
 .pop{opacity:0;animation:po .5s ease forwards}
 @keyframes po{to{opacity:1}}
+
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--blue),var(--sun));z-index:50}
+#spark{position:fixed;top:0;left:0;width:16px;height:16px;background:var(--sun);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);pointer-events:none;opacity:0;z-index:60;transition:opacity .3s}
+.hero{position:relative}
+.fl{position:absolute;pointer-events:none;animation:drift 7s ease-in-out infinite}
+.f1{top:4px;left:46%}.f2{bottom:26px;left:3%;animation-delay:-2s}.f3{top:46%;left:47%;animation-delay:-4s}
+@keyframes drift{50%{transform:translateY(-12px) rotate(12deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+h1{animation:rise .8s .1s both}.lede{animation:rise .8s .35s both}.btns{animation:rise .8s .55s both}
+.hl{background-size:0 100%;background-repeat:no-repeat;animation:hlw .8s 1s ease forwards}
+@keyframes hlw{to{background-size:100% 100%}}
+.sketch{animation:fl 6s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:rotate(1.5deg) translateY(0)}50%{transform:rotate(1.5deg) translateY(-7px)}}
+nav .links a{position:relative}
+nav .links a::after{content:"";position:absolute;left:0;bottom:-3px;height:2px;width:100%;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+nav .links a:hover::after{transform:scaleX(1)}
+.reveal h2::after{width:0;transition:width .8s .3s ease}
+.reveal.in h2::after{width:90px}
+.reveal.in .group{animation:rise .6s backwards;animation-delay:calc(var(--i,0)*100ms)}
+.reveal.in .chip{animation:rise .5s backwards;animation-delay:calc(var(--i,0)*45ms + 200ms)}
+.reveal.in .certs li{animation:rise .5s backwards;animation-delay:calc(var(--i,0)*70ms)}
+.reveal.in .num div,.reveal.in .story>div{animation:rise .6s backwards;animation-delay:calc(var(--i,0)*120ms + 150ms)}
+@keyframes dotp{from{transform:scale(0)}}
+.reveal.in .dots i.on{animation:dotp .4s backwards;animation-delay:calc(var(--i,0)*45ms + 500ms)}
+.tw{transform-box:fill-box;transform-origin:center;animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{50%{transform:scale(1.3) rotate(15deg);opacity:.7}}
+.contact>.hand{display:inline-block;animation:wig 3s ease-in-out infinite}
+@keyframes wig{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes ring{0%{box-shadow:4px 4px 0 var(--blue),0 0 0 0 rgba(58,91,255,.45)}70%,100%{box-shadow:4px 4px 0 var(--blue),0 0 0 14px rgba(58,91,255,0)}}
+.contact .btn.main{animation:ring 2.4s infinite}
+.contact .btn.main:hover{animation:none}
+@media (max-width:760px){.fl{display:none}.sketch{animation:none}}
+@media (prefers-reduced-motion:reduce){.hl{background-size:100% 100%}.reveal h2::after{width:90px}#spark{display:none}}
+.chapters{position:relative;padding-left:34px}
+.chapters::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;border-left:3px dashed var(--blue);opacity:.5}
+.chap{position:relative;margin-bottom:22px}
+.chap .dot{position:absolute;left:-34px;top:20px;width:24px;height:24px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);transform:scale(0);transition:transform .4s .2s}
+.chap.in .dot{transform:scale(1)}
+.chap:nth-child(2n) .dot{background:var(--blue)}.chap:nth-child(3n) .dot{background:var(--mint)}
+.chap .card{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:16px 22px;max-width:660px;transition:transform .2s,box-shadow .2s}
+.chap .card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--sun)}
+.chap h3{margin:2px 0 6px;font-size:1.25rem}.chap p{margin:0;color:var(--soft)}
+.chap.next .card{border-style:dashed;background:transparent}
+.twist{margin:0 0 14px;padding:10px 14px;background:var(--grid);border-left:4px solid var(--sun);border-radius:4px 10px 10px 4px;font-size:.95rem}
+.twist .hand{display:block;margin-bottom:2px}
+@media (prefers-reduced-motion:reduce){.chap .dot{transform:none}}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 @media (max-width:760px){.hero,.about,.story{grid-template-columns:1fr}nav .links a.h{display:none}.sketch{transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}.draw{stroke-dashoffset:0}.pop{opacity:1}}
 </style>
 </head>
 <body>
+<div id="bar"></div><div id="spark" aria-hidden="true"></div>
 <div class="wrap">
-<nav><span></span><div class="links"><a class="h" href="#work">Projects</a><a class="h" href="#path">Experience</a><a href="#hello">Contact</a><button id="theme" aria-label="Switch light or dark theme">Light / dark</button></div></nav>
+<nav><span></span><div class="links"><a class="h" href="#story">Story</a><a class="h" href="#work">Projects</a><a class="h" href="#path">Experience</a><a href="#hello">Contact</a><button id="theme" aria-label="Switch light or dark theme">Light / dark</button></div></nav>
 
 <header class="hero">
+<svg class="fl f1" viewBox="0 0 40 40" width="34" fill="none" stroke="#3a5bff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M20 4v32M4 20h32"/></svg>
+<svg class="fl f2" viewBox="0 0 40 40" width="30" aria-hidden="true"><path d="M20 3l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="#ffc93c" stroke="#14213d" stroke-width="2"/></svg>
+<svg class="fl f3" viewBox="0 0 60 20" width="60" fill="none" stroke="#1f9d78" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M3 12q8-12 16 0t16 0t16 0"/></svg>
 <div>
 <h1>I like problems that <span class="hl">fight back.</span></h1>
 <p class="lede">Final-year CS student who builds things that actually run: a delivery platform that finds the nearest rider in real time, and a chatbot that answers from your own documents. Looking for my first role as a Software Developer.</p>
@@ -148,8 +198,8 @@ footer{text-align:center;color:var(--soft);font-size:.85rem;padding:10px 0 34px}
 <rect x="82" y="196" width="96" height="56" rx="7" fill="var(--sun)"/>
 <path d="M118 216L106 224L118 232M142 216L154 224L142 232M133 212L127 236" stroke-width="2.5"/>
 </g>
-<path d="M232 96l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="var(--sun)" stroke-width="2"/>
-<path d="M30 70v16M22 78h16" stroke="var(--blue)"/><path d="M236 200v12M230 206h12" stroke="var(--blue)"/>
+<path class="tw" d="M232 96l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="var(--sun)" stroke-width="2"/>
+<path class="tw" style="animation-delay:-1s" d="M30 70v16M22 78h16" stroke="var(--blue)"/><path class="tw" style="animation-delay:-1.7s" d="M236 200v12M230 206h12" stroke="var(--blue)"/>
 <path d="M20 244q8-10 16 0t16 0" stroke="var(--blue)" stroke-width="2.5"/>
 <path d="M196 14h92a8 8 0 0 1 8 8v28a8 8 0 0 1-8 8h-60l-16 14 2-14h-18a8 8 0 0 1-8-8V22a8 8 0 0 1 8-8z" fill="var(--card)" stroke-width="2.5"/>
 <text x="246" y="43" text-anchor="middle" font-family="Reenie Beanie,cursive" font-size="24" fill="var(--blue)" stroke="none">it compiles!</text>
@@ -159,6 +209,18 @@ footer{text-align:center;color:var(--soft);font-size:.85rem;padding:10px 0 34px}
 <div class="note"><span class="hand">things I keep coming back to</span>
 <ul><li>Reading the error message properly, then Googling</li><li>Making it work first, then making it clean</li><li>Writing tests for the part I'm most scared of</li><li>Learning a tool by building something with it</li></ul></div>
 </div>
+</div>
+</section>
+
+<section id="story" class="reveal">
+<h2>My story so far</h2>
+<p class="intro">Not a list of dates. These are the chapters that changed how I think about building things.</p>
+<div class="chapters">
+<div class="chap reveal"><span class="dot"></span><div class="card"><span class="hand">Chapter 1 · 2023</span><h3>Curious enough to start</h3><p>I joined B.Tech Computer Science at VIT Bhopal. DSA, OOP and DBMS came first, and I quickly learned that I enjoy the exact moment a confusing problem finally makes sense.</p></div></div>
+<div class="chap reveal"><span class="dot"></span><div class="card"><span class="hand">Chapter 2 · along the way</span><h3>Learning out loud</h3><p>I became a core member of the AWS Club and the NTC Club, took part in Smart India Hackathon and the Accenture Innovation Challenge, and finished the Deloitte Technology Job Simulation. These showed me what real problems look like outside a classroom.</p></div></div>
+<div class="chap reveal"><span class="dot"></span><div class="card"><span class="hand">Chapter 3 · May to Jul 2026</span><h3>The machine learning detour</h3><p>My AI/ML internship turned into nine projects: image classifiers, a face recogniser, an MRI model, agents learning to play CartPole and Lunar Lander, and a recommender. I ended it by building a RAG chatbot as my capstone.</p></div></div>
+<div class="chap reveal"><span class="dot"></span><div class="card"><span class="hand">Chapter 4 · Aug 2026</span><h3>Back to building products</h3><p>Then I went full-stack and built the Last-Mile Delivery Tracker, planned in phases from architecture to deployment, with real-time tracking, tests and a live link at the end.</p></div></div>
+<div class="chap next reveal"><span class="dot"></span><div class="card"><span class="hand">Chapter 5 · now</span><h3>Still being written</h3><p>I'm looking for my first role as a Software Developer, on a team where I can keep learning fast and ship things people actually use.</p></div></div>
 </div>
 </section>
 
@@ -180,6 +242,7 @@ footer{text-align:center;color:var(--soft);font-size:.85rem;padding:10px 0 34px}
 <div><h4>What I built</h4><p>A platform for three roles (Customer, Agent, Admin) with live order tracking, automatic assignment of the nearest agent, and a flow for failed deliveries and reschedules.</p></div>
 <div><h4>The impact</h4><p>An order goes from placed to assigned without a human in the middle, and customers are told by email and SMS when something goes wrong.</p></div>
 </div>
+<p class="twist"><span class="hand">the interesting bit</span>Real deliveries don't always go to plan. Instead of treating a failed delivery as an error, I made it a proper flow: the customer is told by email and SMS, the order can be rescheduled, and the story carries on.</p>
 <div class="wow"><strong>What makes it stand out</strong>
 <ul><li>Haversine-distance auto-assignment of the closest agent</li><li>A configurable rate engine with 4 zone-based rate cards</li><li>JWT auth with role-based access, and Jest/Supertest tests on auth, pricing and the reschedule flow</li><li>Deployed on Vercel and Render</li></ul>
 <div class="stack"><span>React</span><span>Vite</span><span>Tailwind</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Socket.IO</span><span>Twilio</span><span>Nodemailer</span></div></div>
@@ -192,6 +255,7 @@ footer{text-align:center;color:var(--soft);font-size:.85rem;padding:10px 0 34px}
 <div><h4>What I built</h4><p>A chatbot you point at your own documents. It indexes them, finds the relevant passages for each question, and hands them to an LLM to answer.</p></div>
 <div><h4>The impact</h4><p>Direct answers grounded in your own files instead of generic replies, which was the point of making it retrieval-based.</p></div>
 </div>
+<p class="twist"><span class="hand">the interesting bit</span>A chatbot that guesses is easy to build. The harder goal was making it answer from your own documents, so every reply starts with retrieval instead of imagination.</p>
 <div class="wow"><strong>What makes it stand out</strong>
 <ul><li>Full ingestion pipeline: load, chunk, embed, index in FAISS</li><li>LangChain retrieval wired to an LLM for grounded responses</li></ul>
 <div class="stack"><span>Python</span><span>LangChain</span><span>FAISS</span><span>LLMs</span></div></div>
@@ -204,6 +268,7 @@ footer{text-align:center;color:var(--soft);font-size:.85rem;padding:10px 0 34px}
 <div><h4>What I built</h4><p>An income classifier, three CNNs (CIFAR-10, face recognition, MRI cancer detection), two reinforcement learning agents, a movie recommender, a deployed ML pipeline and the RAG chatbot.</p></div>
 <div><h4>The impact</h4><p>Breadth with proof: everything is public, organised as scripts and notebooks, with evaluation notes for each.</p></div>
 </div>
+<p class="twist"><span class="hand">the interesting bit</span>Each project taught me a different way a model can be wrong, and a different way to measure it. That is why the evaluation notes live right next to every model.</p>
 <div class="wow"><div class="stack"><span>scikit-learn</span><span>TensorFlow</span><span>Keras</span><span>PyTorch</span><span>OpenAI Gym</span><span>Render</span></div>
 <a class="src" href="https://github.com/riyaashukla30/ai-ml-internship-projects" target="_blank" rel="noopener">Browse the repo on GitHub</a></div>
 </article>
@@ -232,7 +297,7 @@ footer{text-align:center;color:var(--soft);font-size:.85rem;padding:10px 0 34px}
 </section>
 
 <section id="hello" class="contact reveal">
-<span class="hand">okay, that was a lot of scrolling</span>
+<span class="hand">want to help write chapter five?</span>
 <h2>Let's build something together.</h2>
 <p class="intro" style="margin:8px auto 0">If you have a Software Developer opening for a fresher, I'd love to hear about it. I reply fast.</p>
 <div class="row">
@@ -269,6 +334,19 @@ document.getElementById("theme").onclick=function(){
  var dark=r.getAttribute("data-theme")==="dark"||(!r.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme: dark)").matches);
  r.setAttribute("data-theme",dark?"light":"dark");
 };
+var rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.querySelectorAll(".group,.chip,.certs li,.num div,.story>div").forEach(function(el){el.style.setProperty("--i",Array.prototype.indexOf.call(el.parentNode.children,el))});
+var bar=document.getElementById("bar");
+addEventListener("scroll",function(){var h=document.documentElement;bar.style.width=(h.scrollTop/Math.max(h.scrollHeight-h.clientHeight,1)*100)+"%"},{passive:true});
+if(!rm){
+ var co=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;co.unobserve(e.target);e.target.querySelectorAll("strong").forEach(function(s){var n=+s.textContent,t0=performance.now();s.textContent="0";(function f(t){var p=Math.min((t-t0)/1200,1);s.textContent=Math.round(n*p);if(p<1)requestAnimationFrame(f)})(t0)})})},{threshold:.5});
+ document.querySelectorAll(".num").forEach(function(n){co.observe(n)});
+ if(matchMedia("(hover:hover) and (pointer:fine)").matches){
+  var sp=document.getElementById("spark"),mx=0,my=0,x=0,y=0;
+  addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;sp.style.opacity=1});
+  (function loop(){x+=(mx-x)*.15;y+=(my-y)*.15;sp.style.transform="translate("+(x+12)+"px,"+(y+12)+"px) rotate("+(x*.5)+"deg)";requestAnimationFrame(loop)})();
+ }
+}
 </script>
 </body>
 </html>
